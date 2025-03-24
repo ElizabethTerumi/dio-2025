@@ -4,10 +4,9 @@ Este é o repositório do projeto desenvolvido durante o **Bootcamp Avanade** da
 
 
 ## 🎯 Desafio
-
-![Projeto]()
-
 O objetivo deste desafio foi aplicar os conhecimentos adquiridos no curso para construir uma API REST a partir do modelo de um APP do Banco Santander.
+
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/APP%20Santander.png?raw=true)
 
 ## 🚀 Tecnologias 
 
