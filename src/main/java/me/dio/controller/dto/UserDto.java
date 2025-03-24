@@ -18,12 +18,12 @@ public record UserDto(
         List<FeatureDto> features,
         List<NewsDto> news) {
 
-    // Construtor cria instância de User em UserDto.
+    // Metodo Construtor cria instância de User em UserDto.
     public UserDto(User model) {
         this(
                 model.getId(),
                 model.getName(),
-                ofNullable(model.getAccount()).map(AccountDto::new).orElse(null),
+                ofNullable(model.getAccount()).map(AccountDto::new).orElse(null),//Nullable aceita vazio
                 ofNullable(model.getCard()).map(CardDto::new).orElse(null),
                 ofNullable(model.getFeatures()).orElse(emptyList()).stream().map(FeatureDto::new).collect(toList()),
                 ofNullable(model.getNews()).orElse(emptyList()).stream().map(NewsDto::new).collect(toList())

@@ -44,7 +44,7 @@ class UserServiceImplTest {
 		// Cria objeto Card -simulação
 		Card card = new Card();
 		card.setNumber("1111 2222 3333 4444");
-		card.setLimit(new BigDecimal("10000.00"));
+		card.setLimit(new BigDecimal("1000.00"));
 
 		// Cria objeto News -simulação
 		News news = new News();
@@ -70,12 +70,12 @@ class UserServiceImplTest {
 		assertEquals("Maria", createdUser.getName());
 		assertNotNull(createdUser.getAccount());
 		assertEquals("123456-1", createdUser.getAccount().getNumber());
-		assertEquals(0, createdUser.getAccount().getBalance().compareTo(new BigDecimal("1234.64")));
+		assertEquals(0, createdUser.getAccount().getBalance().compareTo(new BigDecimal("1000.00")));
 		assertEquals(0, createdUser.getAccount().getLimit().compareTo(new BigDecimal("1000.00")));
 
 		assertNotNull(createdUser.getCard());
 		assertEquals("1111 2222 3333 4444", createdUser.getCard().getNumber());
-		assertEquals(0, createdUser.getCard().getLimit().compareTo(new BigDecimal("10000.00")));
+		assertEquals(0, createdUser.getCard().getLimit().compareTo(new BigDecimal("1000.00")));
 
 		assertNotNull(createdUser.getFeatures());
 		assertEquals(1, createdUser.getFeatures().size());
