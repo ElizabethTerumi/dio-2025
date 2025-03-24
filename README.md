@@ -55,3 +55,24 @@ classDiagram
   User "1" *-- "1" Card
   User "1" *-- "N" News
 ```
+
+## Spring  initializr - Criação e Importação do Projeto
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Spring%20initializr.jpg?raw=true))
+
+## H2 - Interface web com o banco de dados H2
+Tela Login
+Acesso: localhost:8080/h2-console
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/H2%20login.jpg?raw=true)
+
+## H2 Tela Principal 
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/H2%20Principal.jpg?raw=true)
+
+## Swagger - Interface Swagger UI no projeto Spring Boot 
+Acesso: localhost:8080/swagger-ui.html 
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Tela%20Swagger.jpg?raw=true)
+
+## Deploy - Railway
+![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Deploy%20Railway.png?raw=true)
+
+
+
