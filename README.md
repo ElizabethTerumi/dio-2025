@@ -1,4 +1,4 @@
-# Desafio Avanade - Bootcamp DIO - Java API
+# Desafio Java API - Bootcamp DIO/Avanade
 
 Este é o repositório do projeto desenvolvido durante o **Bootcamp Avanade** da **DIO (Digital Innovation One)**.
 
