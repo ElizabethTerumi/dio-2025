@@ -58,6 +58,7 @@ classDiagram
 ```
 
 ## ⭐ Spring  initializr - Criação e Importação do Projeto
+### Acesso: start.spring.io
 ![Projeto](https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Spring%20initializr.jpg?raw=true))
 
 ## ⭐ H2 - Interface web com o banco de dados H2
