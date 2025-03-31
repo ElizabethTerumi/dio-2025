@@ -30,10 +30,10 @@ public class User {
     //Métodos
     public Long getId() {
         return id;
-    } // Método getter para o atributo 'id', que retorna o valor do 'id'.
+    } // getId = acessa e retorna id
     public void setId(Long id) {
         this.id = id;
-    } // Atribui o valor do parâmetro 'id' ao atributo 'id' da classe.
+    }  // setId = Modifica - atributo id recebe o valor do id do parâmetro
 
     public String getName() {
         return name;

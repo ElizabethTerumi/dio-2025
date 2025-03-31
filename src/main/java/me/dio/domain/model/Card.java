@@ -20,10 +20,10 @@ public class Card {
 
     public Long getId() {
         return id;
-    }
+    } // Método getter para o atributo 'id', que retorna o valor do 'id'.
     public void setId(Long id) {
         this.id = id;
-    }
+    } // Atribui o valor do parâmetro 'id' ao atributo 'id' da classe.
 
     public String getNumber() {
         return number;

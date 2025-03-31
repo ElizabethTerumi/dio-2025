@@ -15,23 +15,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@CrossOrigin// permite ser acessada em outros domínios
-@RestController // anotação indica que a classe com requisiçoões HTTP
-@RequestMapping("/users")//Define as rotas, ex: http://localhos:8080/users
+@CrossOrigin// Acesso outros domínios
+@RestController // anotação indica que a classe será responsável com requisições HTTP
+@RequestMapping("/users") //Define as rotas, ex: http://localhost:8080/users
 @Tag(name = "Users Controller", description = "RESTful API for managing users.")//serve para descrever, documentar a API
 public record UserController(UserService userService) {
 
-    @GetMapping
+    // HTTP GET
+    @GetMapping //HTTP GET
     @Operation(summary = "Get all users", description = "Retrieve a list of all registered users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operation successful")
     })
-    public ResponseEntity<List<UserDto>> findAll() {
-        var users = userService.findAll();
-        var usersDto = users.stream().map(UserDto::new).collect(Collectors.toList());
-        return ResponseEntity.ok(usersDto);
+    public ResponseEntity<List<UserDto>> findAll() { //ResponseEntity - TIPO de retorno da requisição
+        var users = userService.findAll(); //Busca dos usuários /(var = é o tipo da variável -List<User>) + nome da varíavel recebe o método
+        var usersDto = users.stream().map(UserDto::new).collect(Collectors.toList());// converte User em UserDto
+        return ResponseEntity.ok(usersDto); //Retorna a requisição
     }
 
+    //GET
     @GetMapping("/{id}")
     @Operation(summary = "Get a user by ID", description = "Retrieve a specific user based on its ID")
     @ApiResponses(value = {
@@ -43,6 +45,7 @@ public record UserController(UserService userService) {
         return ResponseEntity.ok(new UserDto(user));
     }
 
+    //POST
     @PostMapping
     @Operation(summary = "Create a new user", description = "Create a new user and return the created user's data")
     @ApiResponses(value = {
@@ -58,6 +61,7 @@ public record UserController(UserService userService) {
         return ResponseEntity.created(location).body(new UserDto(user));
     }
 
+    //PUT
     @PutMapping("/{id}")
     @Operation(summary = "Update a user", description = "Update the data of an existing user based on its ID")
     @ApiResponses(value = {
@@ -70,6 +74,7 @@ public record UserController(UserService userService) {
         return ResponseEntity.ok(new UserDto(user));
     }
 
+    //PATCH
     @PatchMapping("/{id}")
     @Operation(summary = "Partially update a user", description = "Update certain fields of an existing user based on its ID")
     @ApiResponses(value = {
@@ -82,6 +87,7 @@ public record UserController(UserService userService) {
         return ResponseEntity.ok(new UserDto(user));
     }
 
+    //DELETE
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user", description = "Delete an existing user based on its ID")
     @ApiResponses(value = {

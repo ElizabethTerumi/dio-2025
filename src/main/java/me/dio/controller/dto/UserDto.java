@@ -9,7 +9,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
-//Cria classe imutável usando record, sem setters apenas getters(acesso) com parâmetros
+//classe imutável , apenas getters(acesso)
 public record UserDto(
         Long id,
         String name,

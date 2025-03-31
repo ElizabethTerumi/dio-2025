@@ -17,10 +17,7 @@ import static java.util.Optional.ofNullable;
 @Service
 public class UserServiceImpl implements UserService {
 
-    /**
-     * ID de usuário utilizado na Santander Dev Week 2023.
-     * Por isso, vamos criar algumas regras para mantê-lo integro.
-     */
+
     private static final Long UNCHANGEABLE_USER_ID = 1L;
 
     private final UserRepository userRepository;
@@ -28,8 +25,8 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    @Transactional(readOnly = true)
+//Este é o construtor da classe. Quando a classe UserServiceImpl for criada, ela receberá um UserRepository como parâmetro e o guardará na variável userRepository.
+    @Transactional(readOnly = true)//Anotação que controla o método
     public List<User> findAll() {
         return this.userRepository.findAll();
     }
@@ -80,56 +77,85 @@ public class UserServiceImpl implements UserService {
     }
 
     // Método patch() para atualizações parciais
+
     @Transactional
     public User patch(Long id, Map<String, Object> updates) {
         // Buscar o usuário pelo ID
         User user = this.findById(id);
 
-        // Iterar sobre o mapa de atualizações e aplicar as mudanças
-        updates.forEach((key, value) -> {
+        // Iterar sobre as chaves do Map de atualizações
+        for (String key : updates.keySet()) {
             switch (key) {
-                case "name":
-                    user.setName((String) value);  // Atualizar o nome do usuário
-                    break;
                 case "account":
-                    user.setAccount((Account) value); // Atualizar a conta
+                    // Atualizar 'account' (limit e balance)
+                    Map<String, Object> accountUpdate = (Map<String, Object>) updates.get(key);
+                    if (accountUpdate.containsKey("limit")) {
+                        BigDecimal newLimit = new BigDecimal(accountUpdate.get("limit").toString());
+                        user.getAccount().setLimit(newLimit);
+                    }
+                    if (accountUpdate.containsKey("balance")) {
+                        BigDecimal newBalance = new BigDecimal(accountUpdate.get("balance").toString());
+                        user.getAccount().setBalance(newBalance);
+                    }
                     break;
-                case "card":
-                    if (value instanceof Map) {
-                        Map<String, Object> cardUpdates = (Map<String, Object>) value;
-                        if (cardUpdates.containsKey("limit")) {
-                            // Garantir que o limite seja um valor válido (BigDecimal)
-                            Object limitValue = cardUpdates.get("limit");
-                            if (limitValue != null) {
-                                try {
-                                    // Converte o valor para BigDecimal de forma segura
-                                    BigDecimal newLimit = new BigDecimal(limitValue.toString());
 
-                                    // Atualiza o limite diretamente, utilizando o método setLimit com BigDecimal
-                                    user.getCard().setLimit(newLimit);
-                                } catch (NumberFormatException e) {
-                                    // Caso ocorra um erro de conversão, lança uma exceção com a mensagem de erro
-                                    throw new IllegalArgumentException("O valor de 'limit' não é válido. Deve ser um número.");
-                                }
+                case "features":
+                    // Atualizar 'features' diretamente
+                    List<Map<String, Object>> featuresUpdate = (List<Map<String, Object>>) updates.get(key);
+                    for (Map<String, Object> featureUpdate : featuresUpdate) {
+                        Long featureId = Long.valueOf(featureUpdate.get("id").toString());
+
+                        // Iterar diretamente sobre a lista de features
+                        for (Feature feature : user.getFeatures()) {
+                            if (feature.getId().equals(featureId)) {
+                                // Atualizar descrição da feature
+                                feature.setDescription((String) featureUpdate.get("description"));
+                                break; // Caso encontrado, sai do loop
                             }
                         }
                     }
                     break;
-                case "features":
-                    user.setFeatures((List<Feature>) value); // Atualizar as features
-                    break;
-                case "news":
-                    user.setNews((List<News>) value); // Atualizar as notícias
-                    break;
-                default:
-                    // Ignorar campos desconhecidos
-                    break;
-            }
-        });
 
-        // Salvar o usuário com as atualizações no banco de dados
+
+                case "news":
+                    // Atualizar 'news' diretamente
+                    List<Map<String, Object>> newsUpdate = (List<Map<String, Object>>) updates.get(key);
+                    for (Map<String, Object> newsUpdateItem : newsUpdate) {
+                        Long newsId = Long.valueOf(newsUpdateItem.get("id").toString());
+
+                        // Iterar diretamente sobre a lista de news
+                        for (News news : user.getNews()) {
+                            if (news.getId().equals(newsId)) {
+                                // Atualizar descrição da notícia
+                                if (newsUpdateItem.containsKey("description")) {
+                                    news.setDescription((String) newsUpdateItem.get("description"));
+                                }
+                                break; // Caso encontrado, sai do loop
+                            }
+                        }
+                    }
+                    break;
+
+
+                case "card":
+                    // Atualizar 'card' (limit)
+                    Map<String, Object> cardUpdate = (Map<String, Object>) updates.get(key);
+                    if (cardUpdate.containsKey("limit")) {
+                        BigDecimal newCardLimit = new BigDecimal(cardUpdate.get("limit").toString());
+                        user.getCard().setLimit(newCardLimit);
+                    }
+                    break;
+
+                default:
+                    // Caso não reconheça a chave, não faz nada ou lança exceção
+                    throw new IllegalArgumentException("Campo desconhecido para atualização: " + key);
+            }
+        }
+
+        // Salvar o usuário com as atualizações
         return this.userRepository.save(user);
     }
+
 
 
 

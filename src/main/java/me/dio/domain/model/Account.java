@@ -26,13 +26,10 @@ public class Account {
     //Métodos
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    } // getId = acessa e retorna id
+    public void setId(Long id) { this.id = id; } // setId = Modifica - atributo id recebe o valor do id do parâmetro
 
-    public String getNumber() {
-        return number;
+    public String getNumber() { return number;
     }
     public void setNumber(String number) {
         this.number = number;

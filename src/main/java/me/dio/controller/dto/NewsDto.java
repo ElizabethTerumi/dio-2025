@@ -10,7 +10,7 @@ public record NewsDto(Long id, String icon, String description) {
         this(model.getId(), model.getIcon(), model.getDescription());
     }
 
-    // Cria metodo chamado to Model()  para converte o NewsDto de volta para o modelo de News.
+    //  metodo: to Model() = converte NewsDto para News.
     public News toModel() {
 
         // Cria objeto model da classe News

@@ -20,10 +20,10 @@ public abstract class BaseItem {
     //Métodos
     public Long getId() {
         return id;
-    }
+    } // getId = acessa e retorna id
     public void setId(Long id) {
         this.id = id;
-    }
+    } // setId = Modifica - atributo id recebe o valor do id do parâmetro
 
     public String getIcon() {
         return icon;

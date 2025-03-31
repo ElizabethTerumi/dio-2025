@@ -3,7 +3,7 @@ package me.dio.controller.dto;
 import me.dio.domain.model.Feature;
 
 //Cria classe imutável usando record, sem setters apenas getters(acesso) com parâmetros
-public record FeatureDto(Long id, String icon, String description) {
+public record  FeatureDto(Long id, String icon, String description) {
 
     // construtor cria instância de Feature em FeatureDto.
     public FeatureDto(Feature model) {
