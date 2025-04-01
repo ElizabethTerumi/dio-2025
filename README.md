@@ -73,6 +73,10 @@ classDiagram
 ### Acesso: localhost:8080/swagger-ui.html 
 <img src="https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Tela%20Swagger.jpg?raw=true" width="auto" height="300" />
 
+## ⭐ Swagger - Interface Swagger UI no projeto Spring Boot 
+### Acesso: localhost:8080/swagger-ui.html 
+<img src="?raw=true" width="auto" height="300" />
+
 
 ## 🧡 Deploy - Railway
 <img src="https://github.com/ElizabethTerumi/dio-2025/blob/main/img/Deploy%20Railway.png??raw=true" width="auto" height="400" />
